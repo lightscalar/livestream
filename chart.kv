@@ -1,0 +1,91 @@
+#:kivy 1.10.0
+#:include cartesian.kv
+
+Chart:
+
+<Chart>:
+    size: 2000, 900
+    size_hint: None, None
+    cartesian: cartesian
+    auto_switch: auto_switch
+    Cartesian:
+        id: cartesian
+        size_hint: None, None
+        size: 1600, 725
+        pos: 300, 180
+    Label:
+        size_hint: None, None
+        color: 0,0,0,1
+        pos_hint: {'x': 0.15, 'y': 0.83}
+        text: root.sensor_name
+        font_size: 40
+    Slider:
+        id: width_slider
+        orientation: 'horizontal'
+        pos_hint: {'x': 0.20, 'y': 0.03}
+        size_hint: 0.30, None
+        min: 1
+        max: 25
+        value: root.chart_width
+        step: 0.5
+        on_value: root.set_chart_width(self.value)
+    Label:
+        text: 'Width'
+        pos_hint: {'x': 0.15, 'y': 0.03}
+        size_hint: None, None
+    Label:
+        text: '{:.2f} seconds'.format(width_slider.value)
+        pos_hint: {'x': 0.53, 'y': 0.03}
+        size_hint: None, None
+    Slider:
+        id: min_slider
+        orientation: 'vertical'
+        max: max_slider.value
+        min: 0.0
+        value: root.chart_min
+        pos_hint: {'x': 0.025, 'y': 0.25}
+        size_hint: None, 0.60
+        on_value: root.set_chart_min(self.value)
+    Label:
+        text: 'Min'
+        pos_hint: {'x': 0.025, 'y': 0.82}
+        size_hint: None, None
+    Label:
+        text: '{:0.3f}'.format(min_slider.value)
+        pos_hint: {'x': 0.025, 'y': 0.15}
+        size_hint: None, None
+    Slider:
+        id: max_slider
+        orientation: 'vertical'
+        min: min_slider.min
+        max: 2.5
+        value: root.chart_max
+        pos_hint: {'x': 0.075, 'y': 0.25}
+        size_hint: None, 0.60
+        on_value: root.set_chart_max(self.value)
+    Label:
+        text: 'Max'
+        pos_hint: {'x': 0.075, 'y': 0.82}
+        size_hint: None, None
+    Label:
+        text: '{:0.3f}'.format(max_slider.value)
+        pos_hint: {'x': 0.075, 'y': 0.15}
+        size_hint: None, None
+    Switch:
+        id: auto_switch
+        size_hint: None, None
+        pos_hint: {'x': 0.80, 'y': 0.03}
+        on_active: root.set_autoscale(self.active)
+    Label:
+        text: 'AutoScale'
+        size_hint: None, None
+        pos_hint: {'x': 0.70, 'y': 0.03}
+    Label:
+        text:
+            'Buffering data; one moment please.' if not self.parent.buffered else ''
+        color: 0,0,0,1
+        size_hint: None, None
+        pos_hint: {'x': 0.5, 'y': 0.75}
+        font_size: 55
+
+
