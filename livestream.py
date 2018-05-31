@@ -15,10 +15,9 @@ oracle = Oracle()
 width_in_seconds = 15
 dt = 1 / 60
 
-
 # Plot all the things
 plt.close("all")
-sns.set_context('poster')
+sns.set_context("poster")
 fig, ax = plt.subplots(figsize=(15, 6))
 plt.ylim([1000, 1100])
 
