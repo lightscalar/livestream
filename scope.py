@@ -4,6 +4,7 @@ from collections import deque
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from time import time
 
 
 # Create an oracle object that streams data from the board.
@@ -17,6 +18,7 @@ dt = 1 / 60
 plt.close("all")
 
 fig, ax = plt.subplots(figsize=(15, 5))
+plt.ylim([1000, 1100])
 
 x = np.arange(0, width_in_seconds, dt)
 y = deque(np.zeros_like(x), maxlen=len(x))
@@ -29,14 +31,17 @@ def init():  # only required for blitting to give a clean slate.
 
 
 def animate(i):
-    t_, y_ = oracle.buffer[2].sample
-    if y_:
-        line.set_ydata(np.sin(x + i / 25))  # update the data.
+    t_ = True
+    while t_:
+        t_, y_ = next(oracle.buffer[2].sample)
+        if y_:
+            y.append(y_)
+            line.set_ydata(y)  # update the data.
     return (line,)
 
 
 ani = animation.FuncAnimation(
-    fig, animate, init_func=init, interval=17, blit=True, save_count=100
+    fig, animate, init_func=init, interval=0, blit=True, save_count=100
 )
 
 plt.show()

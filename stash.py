@@ -30,8 +30,8 @@ class Stash(object):
         else:
             self.t.append(t)
             self.x.append(x)
-        if len(self.x) >= self.M:
-            self.filter()
+        # if len(self.x) >= self.M:
+        #     self.filter()
 
     def filter(self):
         """Super efficient moving average filter."""
@@ -46,8 +46,8 @@ class Stash(object):
     @property
     def sample(self):
         """Return first observed pair (t, y), still in queue."""
-        if len(self.t_) > 0:
-            yield self.t_.popleft(), self.y_.popleft()
+        if len(self.t) > 0:
+            yield self.t.popleft(), self.x.popleft()
         else:
             yield None, None
 
