@@ -4,6 +4,7 @@ from collections import deque
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import seaborn as sns
 from time import time
 
 
@@ -14,15 +15,19 @@ oracle = Oracle()
 width_in_seconds = 15
 dt = 1 / 60
 
+
 # Plot all the things
 plt.close("all")
-
-fig, ax = plt.subplots(figsize=(15, 5))
+sns.set_context('poster')
+fig, ax = plt.subplots(figsize=(15, 6))
 plt.ylim([1000, 1100])
 
+# Set up the line plots.
 x = np.arange(0, width_in_seconds, dt)
 y = deque(np.zeros_like(x), maxlen=len(x))
 line, = ax.plot(x, y)
+plt.xlabel("Time (seconds)")
+plt.ylabel("Bioimpedance (Ohms)")
 
 
 def init():  # only required for blitting to give a clean slate.
@@ -40,6 +45,7 @@ def animate(i):
     return (line,)
 
 
+# Launch the animation, As long as there is data, the plot will shift to left.
 ani = animation.FuncAnimation(
     fig, animate, init_func=init, interval=0, blit=True, save_count=100
 )
