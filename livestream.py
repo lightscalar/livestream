@@ -44,7 +44,7 @@ def animate(i):
     return (line,)
 
 
-# Launch the animation, As long as there is data, the plot will shift to left.
+# Launch the animation; as long as there is data, the plot will shift to left.
 ani = animation.FuncAnimation(
     fig, animate, init_func=init, interval=0, blit=True, save_count=100
 )
