@@ -78,7 +78,7 @@ def animate(i):
 
 # Launch the animation; as long as there is more data available, the plot shifts left.
 ani = animation.FuncAnimation(
-    fig, animate, init_func=init, interval=0, blit=True, save_count=100
+    fig, animate, init_func=init, interval=1, blit=True, save_count=100
 )
 
 plt.show()
