@@ -25,7 +25,7 @@ plt.ylim([1000, 1100])
 x = np.arange(-width_in_seconds, 0, dt)
 y = deque(np.zeros_like(x), maxlen=len(x))
 line, = ax.plot(x, y)
-plt.xlabel("Time (seconds)")
+plt.xlabel("Time Relative to Now (seconds)")
 plt.ylabel("Bioimpedance (Ohms)")
 
 
