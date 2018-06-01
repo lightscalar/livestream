@@ -8,7 +8,7 @@ Once connected to your favorite Biomonitor device, visualize the live data by
 running:
 
 ```unix
-python livestream.py
+$/>python livestream.py
 ```
 
 You can pass a few arguments to this script to change the width of the plot, or
