@@ -13,7 +13,7 @@ oracle = Oracle()
 
 # Define width of plot (in seconds).
 width_in_seconds = 15
-dt = 1 / 60
+dt = 1 / 63
 
 # Plot all the things
 plt.close("all")
@@ -22,7 +22,7 @@ fig, ax = plt.subplots(figsize=(15, 6))
 plt.ylim([1000, 1100])
 
 # Set up the line plots.
-x = np.arange(0, width_in_seconds, dt)
+x = np.arange(-width_in_seconds, 0, dt)
 y = deque(np.zeros_like(x), maxlen=len(x))
 line, = ax.plot(x, y)
 plt.xlabel("Time (seconds)")
