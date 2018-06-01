@@ -1,21 +1,50 @@
 from oracle import *
 
+import argparse
 from collections import deque
-import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import numpy as np
 import seaborn as sns
 from time import time
 
+
+# Check for arguments.
+parser = argparse.ArgumentParser(description="Visualize data.")
+parser.add_argument(
+    "-w",
+    "--width",
+    nargs="?",
+    default=15,
+    type=float,
+    help="Width of the plot, in seconds.",
+)
+parser.add_argument(
+    "-m",
+    "--min",
+    nargs="?",
+    default=800,
+    type=float,
+    help="Minimum y-scale of plot (Ohms).",
+)
+parser.add_argument(
+    "-x",
+    "--max",
+    nargs="?",
+    default=1100,
+    type=float,
+    help="Maximum y-scale of plot (Ohms).",
+)
+args = parser.parse_args()
 
 # Create an oracle object that streams data from the board.
 oracle = Oracle()
 
 # Define width of plot (in seconds).
-width_in_seconds = 15
+width_in_seconds = args.width
 dt = 1 / 63
-min_ohms = 800
-max_ohms = 1100
+min_ohms = args.min
+max_ohms = args.max
 
 # Plot all the things
 plt.close("all")
@@ -31,7 +60,8 @@ plt.xlabel("Time Relative to Now (seconds)")
 plt.ylabel("Bioimpedance (Ohms)")
 
 
-def init():  # only required for blitting to give a clean slate.
+def init():
+    """Only required for blitting to give a clean slate."""
     line.set_ydata([np.nan] * len(x))
     return (line,)
 
