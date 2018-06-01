@@ -14,12 +14,14 @@ oracle = Oracle()
 # Define width of plot (in seconds).
 width_in_seconds = 15
 dt = 1 / 63
+min_ohms = 800
+max_ohms = 1100
 
 # Plot all the things
 plt.close("all")
 sns.set_context("poster")
 fig, ax = plt.subplots(figsize=(15, 6))
-plt.ylim([1000, 1100])
+plt.ylim([min_ohms, max_ohms])
 
 # Set up the line plots.
 x = np.arange(-width_in_seconds, 0, dt)
