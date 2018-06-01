@@ -22,7 +22,7 @@ $/>python livestream.py --max 1500
 To see all available options, run:
 
 ```unix
-$/> python livestream.py -h
+$/>python livestream.py -h
 usage: livestream.py [-h] [-w [WIDTH]] [-m [MIN]] [-x [MAX]]                                            
 Visualize data.                                     
 
