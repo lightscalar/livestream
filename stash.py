@@ -36,7 +36,7 @@ class Stash(object):
         self.x_filtered = deque([], maxlen=1000)
         if self.save_data:
             datestring = datetime.now().strftime("%Y.%m.%d.%H.%M")
-            self.store = Vessel(f"{datestring}.dat")
+            self.store = Vessel(f"data/{datestring}.dat")
             self.store.t = []
             self.store.x = []
 

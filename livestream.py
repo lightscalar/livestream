@@ -52,7 +52,12 @@ parser.add_argument(
     help="Autoscale on (1) or off (0)",
 )
 parser.add_argument(
-    "-s", "--save", nargs="?", default=0, type=float, help="Autoscale on (1) or off (0)"
+    "-s",
+    "--save",
+    nargs="?",
+    default=0,
+    type=float,
+    help="Save the data to disk (1) or not (0)",
 )
 args = parser.parse_args()
 

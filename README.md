@@ -39,4 +39,10 @@ optional arguments:
                         Number of filter taps to use; 0 for no filtering.
   -a [AUTOSCALE], --autoscale [AUTOSCALE]
                         Autoscale on (1) or off (0)
+   -s [SAVE], --save [SAVE]
+                        Save the data to disk (1) or not (0)
 ```
+
+If the `-s` flag is set to `1`, data will be written to the disk in the `/data`
+folder. This data can later be visualized and filtered by running the
+`view_data.py` script.
