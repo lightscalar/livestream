@@ -6,7 +6,8 @@ from collections import deque
 class Stash(object):
     """Store data and filter it."""
 
-    def __init__(self, nb_taps=11, demand_uniqueness=True):
+    def __init__(self, nb_taps=5, demand_uniqueness=True, do_filter=True):
+        self.do_filter = do_filter
         self.demand_uniqueness = demand_uniqueness
         self.M = M = nb_taps
         self.p = p = int((M - 1) / 2)
@@ -60,10 +61,16 @@ class Stash(object):
     @property
     def sample(self):
         """Return first observed pair (t, x), still in queue."""
-        if len(self.t) > 0:
-            yield self.t_filtered.popleft(), self.x_filtered.popleft()
-        else:
-            yield None, None
+        if self.do_filter:
+            if len(self.t_filtered) > 0:
+                yield self.t_filtered.popleft(), self.x_filtered.popleft()
+            else:
+                yield None, None
+        else: # let's not filter
+            if len(self.t) > 0:
+                yield self.t.popleft(), self.x.popleft()
+            else:
+                yield None, None
 
 
 if __name__ == "__main__":

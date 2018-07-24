@@ -51,7 +51,7 @@ class Oracle(Thread):
         # Connect to the juffer file.
         self.buffer = {}
         for chn in self.allowed_channels:
-            self.buffer[chn] = Stash(11, demand_uniqueness=True)
+            self.buffer[chn] = Stash(5, demand_uniqueness=True, do_filter=False)
 
         # Define the workers.
         self.q = Queue()

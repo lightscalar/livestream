@@ -50,7 +50,9 @@ max_ohms = args.max
 plt.close("all")
 sns.set_context("poster")
 fig, ax = plt.subplots(figsize=(15, 6))
-plt.ylim([min_ohms, max_ohms])
+ax.relim()
+ax.autoscale_view(True, True, True)
+# plt.ylim([min_ohms, max_ohms])
 
 # Set up the line plots.
 x = np.arange(-width_in_seconds, 0, dt)
@@ -62,7 +64,7 @@ plt.ylabel("Bioimpedance (Ohms)")
 
 def init():
     """Only required for blitting to give a clean slate."""
-    line.set_ydata([np.nan] * len(x))
+    line.set_ydata([0] * len(x))
     return (line,)
 
 
@@ -73,12 +75,16 @@ def animate(i):
         if y_:
             y.append(y_)
             line.set_ydata(y)  # update the data.
+            mu = np.mean(y)
+            std = np.std(y)
+            if np.random.rand() < 0.2:
+                plt.ylim([mu - 5 * std, mu + 5 * std])
     return (line,)
 
 
 # Launch the animation; as long as there is more data available, the plot shifts left.
 ani = animation.FuncAnimation(
-    fig, animate, init_func=init, interval=1, blit=True, save_count=100
+    fig, animate, init_func=init, interval=1, blit=False, save_count=100
 )
 
 plt.show()
