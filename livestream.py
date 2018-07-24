@@ -35,16 +35,26 @@ parser.add_argument(
     type=float,
     help="Maximum y-scale of plot (Ohms).",
 )
+parser.add_argument(
+    "-f",
+    "--filter",
+    nargs="?",
+    default=3,
+    type=float,
+    help="Number of filter taps to use; 0 for no filtering.",
+)
 args = parser.parse_args()
 
 # Create an oracle object that streams data from the board.
-oracle = Oracle()
+filter_taps = args.filter
+oracle = Oracle(nb_taps=filter_taps)
 
 # Define width of plot (in seconds).
 width_in_seconds = args.width
 dt = 1 / 63
 min_ohms = args.min
 max_ohms = args.max
+
 
 # Plot all the things
 plt.close("all")

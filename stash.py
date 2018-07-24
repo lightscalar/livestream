@@ -43,7 +43,7 @@ class Stash(object):
         else:
             self.t.append(t)
             self.x.append(x)
-        if len(self.x) >= self.M:
+        if len(self.x) >= self.M and self.do_filter:
             self.filter()
 
     def filter(self):
@@ -81,7 +81,7 @@ if __name__ == "__main__":
 
     # Create a noisy sinusoidal signal.
     t = np.linspace(0, 10, 1000)
-    x = np.sin(2 * np.pi * t / 3) + 0.05 * np.random.randn(1000)
+    x = np.sin(2 * np.pi * t / 3) + 0.05 * np.random.randn(1000) + 15
 
     # Estimate number of taps required for specified cutoff frequency.
     # See (https://goo.gl/yCySp4) for more details.

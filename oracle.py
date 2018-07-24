@@ -35,12 +35,13 @@ def find_serial_devices():
 class Oracle(Thread):
     """Connect to biomonitor device and push data to a socket connection."""
 
-    def __init__(self):
+    def __init__(self, nb_taps=3):
         """See if we can find a valid biomonitor device"""
         Thread.__init__(self)
         self.port = None
         self.go = True
         self.last_time = time()
+        self.nb_taps = nb_taps
 
         # self.allowed_channels = [0, 1]
         self.allowed_channels = [2]
@@ -50,8 +51,11 @@ class Oracle(Thread):
 
         # Connect to the juffer file.
         self.buffer = {}
+        do_filter = self.nb_taps != 0
         for chn in self.allowed_channels:
-            self.buffer[chn] = Stash(5, demand_uniqueness=True, do_filter=False)
+            self.buffer[chn] = Stash(
+                self.nb_taps, demand_uniqueness=True, do_filter=do_filter
+            )
 
         # Define the workers.
         self.q = Queue()

@@ -24,14 +24,16 @@ To see all available options, run:
 ```unix
 $/>python livestream.py -h
 usage: livestream.py [-h] [-w [WIDTH]] [-m [MIN]] [-x [MAX]]                                            
-Visualize data.                                     
+Visualize data.
 
-optional arguments:                                 
-  -h, --help            show this help message and exit                                                 
-  -w [WIDTH], --width [WIDTH]                       
-                        Width of the plot, in seconds.                                                  
-  -m [MIN], --min [MIN]                             
-                        Minimum y-scale of plot (Ohms).                                                 
-  -x [MAX], --max [MAX]                             
-                        Maximum y-scale of plot (Ohms).  
+optional arguments:
+  -h, --help            show this help message and exit
+  -w [WIDTH], --width [WIDTH]
+                        Width of the plot, in seconds.
+  -m [MIN], --min [MIN]
+                        Minimum y-scale of plot (Ohms).
+  -x [MAX], --max [MAX]
+                        Maximum y-scale of plot (Ohms).
+  -f [FILTER], --filter [FILTER]
+                        Number of filter taps to use; 0 for no filtering.
 ```
