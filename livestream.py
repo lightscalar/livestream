@@ -73,7 +73,7 @@ oracle = Oracle(nb_taps=filter_taps, do_save_data=save_data)
 
 # Define width of plot (in seconds).
 width_in_seconds = args.width
-dt = 1 / 63
+dt = 1 / 98 # estimate! May vary with machine/biomonitor.
 min_ohms = args.min
 max_ohms = args.max
 
