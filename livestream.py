@@ -43,7 +43,18 @@ parser.add_argument(
     type=float,
     help="Number of filter taps to use; 0 for no filtering.",
 )
+parser.add_argument(
+    "-a",
+    "--autoscale",
+    nargs="?",
+    default=1,
+    type=float,
+    help="Autoscale on (1) or off (0)",
+)
 args = parser.parse_args()
+
+# Are we autoscaling?
+autoscale = args.autoscale
 
 # Create an oracle object that streams data from the board.
 filter_taps = args.filter
@@ -60,9 +71,7 @@ max_ohms = args.max
 plt.close("all")
 sns.set_context("poster")
 fig, ax = plt.subplots(figsize=(15, 6))
-ax.relim()
-ax.autoscale_view(True, True, True)
-# plt.ylim([min_ohms, max_ohms])
+plt.ylim([min_ohms, max_ohms])
 
 # Set up the line plots.
 x = np.arange(-width_in_seconds, 0, dt)
@@ -87,7 +96,7 @@ def animate(i):
             line.set_ydata(y)  # update the data.
             mu = np.mean(y)
             std = np.std(y)
-            if np.random.rand() < 0.2:
+            if autoscale:
                 plt.ylim([mu - 5 * std, mu + 5 * std])
     return (line,)
 

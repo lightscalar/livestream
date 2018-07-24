@@ -12,8 +12,9 @@ $/>python livestream.py
 ```
 
 You can pass a few arguments to this script to change the width of the plot, or
-the maximum and minimum y-scale ranges. For example, to set the upper limit of the plot
-to 1500:
+the maximum and minimum y-scale ranges, turn auto-scaling on and off, and set
+the number of filter taps. For example, to set the upper limit of the plot to
+1500:
 
 ```unix
 $/>python livestream.py --max 1500
@@ -36,4 +37,6 @@ optional arguments:
                         Maximum y-scale of plot (Ohms).
   -f [FILTER], --filter [FILTER]
                         Number of filter taps to use; 0 for no filtering.
+  -a [AUTOSCALE], --autoscale [AUTOSCALE]
+                        Autoscale on (1) or off (0)
 ```
