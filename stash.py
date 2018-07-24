@@ -48,14 +48,19 @@ class Stash(object):
                 if self.x[-1] != x:
                     self.t.append(t)
                     self.x.append(x)
+                    self.save_to_store(t, x)
             else:
                 self.t.append(t)
                 self.x.append(x)
+                self.save_to_store(t, x)
         else:
             self.t.append(t)
             self.x.append(x)
+            self.save_to_store(t, x)
         if len(self.x) >= self.M and self.do_filter:
             self.filter()
+
+    def save_to_store(self, t, x):
         if self.save_data:
             self.store.t.append(t)
             self.store.x.append(x)

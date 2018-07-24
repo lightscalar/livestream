@@ -9,6 +9,7 @@ import seaborn as sns
 
 # List all collected data files.
 datafiles = glob("data/*.dat")
+datafiles = sorted(datafiles)
 
 # Locate and load the latest datafile.
 datafile = datafiles[-1]  # grab the latest
