@@ -51,14 +51,20 @@ parser.add_argument(
     type=float,
     help="Autoscale on (1) or off (0)",
 )
+parser.add_argument(
+    "-s", "--save", nargs="?", default=0, type=float, help="Autoscale on (1) or off (0)"
+)
 args = parser.parse_args()
 
 # Are we autoscaling?
 autoscale = args.autoscale
 
+# Should we save the data?
+save_data = args.save
+
 # Create an oracle object that streams data from the board.
 filter_taps = args.filter
-oracle = Oracle(nb_taps=filter_taps)
+oracle = Oracle(nb_taps=filter_taps, do_save_data=save_data)
 
 # Define width of plot (in seconds).
 width_in_seconds = args.width

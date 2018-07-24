@@ -8,7 +8,7 @@ Once connected to your favorite Biomonitor device, visualize the live data by
 running:
 
 ```unix
-$/>python livestream.py
+$/> python livestream.py
 ```
 
 You can pass a few arguments to this script to change the width of the plot, or
@@ -17,13 +17,13 @@ the number of filter taps. For example, to set the upper limit of the plot to
 1500:
 
 ```unix
-$/>python livestream.py --max 1500
+$/> python livestream.py --max 1500
 ```
 
 To see all available options, run:
 
 ```unix
-$/>python livestream.py -h
+$/> python livestream.py -h
 usage: livestream.py [-h] [-w [WIDTH]] [-m [MIN]] [-x [MAX]]                                            
 Visualize data.
 

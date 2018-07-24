@@ -1,4 +1,7 @@
 """A class for stashing data (and possibly filtering it, in an online way)."""
+from vessel import Vessel
+
+from datetime import datetime
 import numpy as np
 from collections import deque
 
@@ -6,8 +9,11 @@ from collections import deque
 class Stash(object):
     """Store data and filter it."""
 
-    def __init__(self, nb_taps=5, demand_uniqueness=True, do_filter=True):
+    def __init__(
+        self, nb_taps=5, demand_uniqueness=True, do_filter=True, save_data=False
+    ):
         self.do_filter = do_filter
+        self.save_data = save_data
         self.demand_uniqueness = demand_uniqueness
         self.M = M = nb_taps
         self.p = p = int((M - 1) / 2)
@@ -28,6 +34,11 @@ class Stash(object):
         # average filter.
         self.t_filtered = deque([], maxlen=1000)
         self.x_filtered = deque([], maxlen=1000)
+        if self.save_data:
+            datestring = datetime.now().strftime("%Y.%m.%d.%H.%M")
+            self.store = Vessel(f"{datestring}.dat")
+            self.store.t = []
+            self.store.x = []
 
     def add(self, t, x):
         """Add new point."""
@@ -45,6 +56,12 @@ class Stash(object):
             self.x.append(x)
         if len(self.x) >= self.M and self.do_filter:
             self.filter()
+        if self.save_data:
+            self.store.t.append(t)
+            self.store.x.append(x)
+            if np.mod(len(self.store.t), 1000) == 0:
+                # Save every 1000 samples.
+                self.store.save()
 
     def filter(self):
         """Super efficient moving average filter."""
@@ -66,7 +83,7 @@ class Stash(object):
                 yield self.t_filtered.popleft(), self.x_filtered.popleft()
             else:
                 yield None, None
-        else: # let's not filter
+        else:  # let's not filter
             if len(self.t) > 0:
                 yield self.t.popleft(), self.x.popleft()
             else:
