@@ -49,7 +49,7 @@ parser.add_argument(
     nargs="?",
     default=0,
     type=float,
-    help="Number of filter taps to use; 0 for no filtering.",
+    help="Which channel should we plot?",
 )
 parser.add_argument(
     "-a",

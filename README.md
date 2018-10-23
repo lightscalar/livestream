@@ -24,7 +24,10 @@ To see all available options, run:
 
 ```unix
 $/> python livestream.py -h
-usage: livestream.py [-h] [-w [WIDTH]] [-m [MIN]] [-x [MAX]]                                            
+
+usage: livestream.py [-h] [-w [WIDTH]] [-m [MIN]] [-x [MAX]] [-f [FILTER]]
+                     [-c [CHANNEL]] [-a [AUTOSCALE]] [-s [SAVE]]
+
 Visualize data.
 
 optional arguments:
@@ -37,9 +40,11 @@ optional arguments:
                         Maximum y-scale of plot (Ohms).
   -f [FILTER], --filter [FILTER]
                         Number of filter taps to use; 0 for no filtering.
+  -c [CHANNEL], --channel [CHANNEL]
+                        Which channel should we plot?
   -a [AUTOSCALE], --autoscale [AUTOSCALE]
                         Autoscale on (1) or off (0)
-   -s [SAVE], --save [SAVE]
+  -s [SAVE], --save [SAVE]
                         Save the data to disk (1) or not (0)
 ```
 
