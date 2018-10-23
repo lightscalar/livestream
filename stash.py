@@ -10,7 +10,11 @@ class Stash(object):
     """Store data and filter it."""
 
     def __init__(
-        self, nb_taps=5, demand_uniqueness=True, do_filter=True, save_data=False
+        self,
+        nb_taps: int = 5,
+        demand_uniqueness: bool = True,
+        do_filter=True,
+        save_data=False,
     ):
         self.do_filter = do_filter
         self.save_data = save_data

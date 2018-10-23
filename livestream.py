@@ -44,6 +44,14 @@ parser.add_argument(
     help="Number of filter taps to use; 0 for no filtering.",
 )
 parser.add_argument(
+    "-c",
+    "--channel",
+    nargs="?",
+    default=0,
+    type=float,
+    help="Number of filter taps to use; 0 for no filtering.",
+)
+parser.add_argument(
     "-a",
     "--autoscale",
     nargs="?",
@@ -67,18 +75,22 @@ autoscale = args.autoscale
 # Should we save the data?
 save_data = args.save
 
+# What channel are we plotting?
+channels = [int(args.channel)]
+print(f"> Plotting data from channel {channels[0]}.")
+
 # Create an oracle object that streams data from the board.
 filter_taps = args.filter
-oracle = Oracle(nb_taps=filter_taps, do_save_data=save_data)
+# channels = [1]
+oracle = Oracle(channels=channels, nb_taps=filter_taps, do_save_data=save_data)
 
 # Define width of plot (in seconds).
 width_in_seconds = args.width
-dt = 1 / 98 # estimate! May vary with machine/biomonitor.
+dt = 1 / 98  # estimate! May vary with machine/biomonitor.
 min_ohms = args.min
 max_ohms = args.max
 
-
-# Plot all the things
+# Plot all the things.
 plt.close("all")
 sns.set_context("poster")
 fig, ax = plt.subplots(figsize=(15, 6))
@@ -94,14 +106,14 @@ plt.ylabel("Bioimpedance (Ohms)")
 
 def init():
     """Only required for blitting to give a clean slate."""
-    line.set_ydata([0] * len(x))
+    line.set_ydata([np.nan] * len(x))
     return (line,)
 
 
 def animate(i):
     t_ = True
     while t_:
-        t_, y_ = next(oracle.buffer[2].sample)
+        t_, y_ = next(oracle.buffer[channels[0]].sample)
         if y_:
             y.append(y_)
             line.set_ydata(y)  # update the data.

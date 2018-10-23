@@ -21,7 +21,7 @@ x = np.array(x)
 t -= t[0]
 
 # Filter the data.
-x_, _ = lowpass(t, x)
+x_, _ = lowpass(t, x, freq_cutoff=3)
 
 plt.ion()
 plt.close('all')

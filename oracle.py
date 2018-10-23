@@ -35,7 +35,7 @@ def find_serial_devices():
 class Oracle(Thread):
     """Connect to biomonitor device and push data to a socket connection."""
 
-    def __init__(self, nb_taps=3, do_save_data=False):
+    def __init__(self, channels=[0],  nb_taps=3, do_save_data=False):
         """See if we can find a valid biomonitor device"""
         Thread.__init__(self)
         self.do_save_data = do_save_data
@@ -45,7 +45,7 @@ class Oracle(Thread):
         self.nb_taps = nb_taps
 
         # self.allowed_channels = [0, 1]
-        self.allowed_channels = [2]
+        self.allowed_channels = channels
 
         # Connect to the hardware.
         self.connect_to_board()
