@@ -3,7 +3,7 @@ from vessel import Vessel
 
 from glob import glob
 import numpy as np
-import pylab as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 
@@ -23,7 +23,8 @@ t -= t[0]
 # Filter the data.
 x_, _ = lowpass(t, x, freq_cutoff=3)
 
-plt.ion()
-plt.close('all')
-plt.figure(100)
+#plt.ion()
+#plt.close('all')
+#plt.figure(100)
 plt.plot(t[100:], x_[100:])
+plt.show()
